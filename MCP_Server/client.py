@@ -1,11 +1,14 @@
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langgraph.prebuilt import create_react_agent
+from langchain.agents import create_agent
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import asyncio
 import sys
+from pathlib import Path
 
 load_dotenv()
+
+math_server_path = Path(__file__).parent / "MathServer.py"
 
 async def main():
     client = MultiServerMCPClient(
@@ -13,7 +16,7 @@ async def main():
             'math':{
                 "command": sys.executable,
                 "args":[
-                    "MathServer.py"
+                    str(math_server_path)
                 ],
                 "transport":"stdio"
             },
@@ -31,7 +34,7 @@ async def main():
     model = ChatGroq(
         model="llama-3.3-70b-versatile"
     )
-    agent = create_react_agent(
+    agent = create_agent(
         model, tools
     )
 

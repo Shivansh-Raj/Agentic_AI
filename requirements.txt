@@ -1,0 +1,11 @@
+langchain
+langgraph
+langchain_community
+langchain-groq
+python-dotenv
+ipykernel
+langchain-tavily
+pandas
+tiktoken
+mcp
+langchain-mcp-adapters
